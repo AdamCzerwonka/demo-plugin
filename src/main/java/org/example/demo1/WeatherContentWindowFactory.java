@@ -28,7 +28,6 @@ public class WeatherContentWindowFactory implements ToolWindowFactory {
         private final JPanel contentPanel = new JPanel();
         private final JTextField textField = new JTextField();
         private final JButton searchButton = new JButton("Search");
-        private Location location;
 
         public WeatherContentWindow(ToolWindow toolWindow) {
             textField.setPreferredSize(new Dimension(200, 30));
@@ -46,19 +45,25 @@ public class WeatherContentWindowFactory implements ToolWindowFactory {
         }
 
         class SearchButtonListener implements ActionListener {
+            private final LocationService locationService = new LocationService();
+            private final WeatherService weatherService = new WeatherService();
+            private WeatherContainer container;
+
             public void actionPerformed(ActionEvent e) {
                 String value = textField.getText();
-                LocationService locationService = new LocationService();
+                Location location;
                 try {
                     location = locationService.getLocation(value);
                 } catch (Exception exception) {
                     JOptionPane.showMessageDialog(null, "Location not found", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                WeatherService weatherService = new WeatherService();
                 WeatherData data = weatherService.getWeather(location);
 
-                WeatherContainer container = new WeatherContainer(data, location);
+                if (container != null) {
+                    contentPanel.remove(container.getContentPanel());
+                }
+                container = new WeatherContainer(data, location);
                 contentPanel.add(container.getContentPanel(), BorderLayout.PAGE_END);
                 contentPanel.revalidate();
             }

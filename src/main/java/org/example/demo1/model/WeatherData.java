@@ -4,6 +4,8 @@ import org.jetbrains.annotations.Nls;
 
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -52,9 +54,11 @@ public class WeatherData implements TableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         if (columnIndex == 0) {
-            return hourly.time.get(rowIndex).get(Calendar.HOUR_OF_DAY) + ":" + hourly.time.get(rowIndex).get(Calendar.MINUTE);
+            Calendar calendar = hourly.time.get(rowIndex);
+            LocalDateTime time = LocalDateTime.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId());
+            return time.format(DateTimeFormatter.ofPattern("HH:mm"));
         }
-        return hourly.temperature_2m.get(rowIndex);
+        return hourly.temperature_2m.get(rowIndex) + "\u00B0C";
     }
 
     @Override

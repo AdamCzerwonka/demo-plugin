@@ -14,7 +14,9 @@ public class WeatherContainer {
     public WeatherContainer(WeatherData data, Location location) {
         LayoutManager manager = new BoxLayout(contentPanel, BoxLayout.Y_AXIS);
         contentPanel.setLayout(manager);
-        contentPanel.add(new JLabel("Weather Data for: " + location.name), BorderLayout.PAGE_START);
+        JLabel label = new JLabel("Weather Data for: " + location.name);
+        label.setFont(new Font("Arial", Font.BOLD, 20));
+        contentPanel.add(label, BorderLayout.PAGE_START);
         contentPanel.add(new JLabel("Current weather"));
         contentPanel.add(new JLabel("Temperature: " + data.current.temperature_2m + "\u00B0C"));
         contentPanel.add(new JLabel("Humidity: " + data.current.relative_humidity_2m + "%"));

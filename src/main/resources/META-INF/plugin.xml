@@ -14,8 +14,7 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    Weather for you. Very nice. I love Java.
   ]]></description>
 
     <!-- Product and plugin compatibility requirements.
@@ -25,7 +24,7 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="org.example.demo1.WeatherContentWindowFactory" id="Sample Plugin" secondary="false"
+        <toolWindow factoryClass="org.example.demo1.WeatherContentWindowFactory" id="Weather" secondary="false"
                     anchor="right"/>
     </extensions>
 </idea-plugin>

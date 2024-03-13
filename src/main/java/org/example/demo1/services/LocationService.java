@@ -15,6 +15,7 @@ public class LocationService {
     private final static String API_KEY = "5742b11caf8e303b9034acf28083e2fe";
 
     public Location getLocation(String cityName) {
+        cityName = cityName.replace(" ", "_");
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&appid=" + API_KEY))
                 .GET()
