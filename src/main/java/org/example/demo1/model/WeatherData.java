@@ -4,6 +4,8 @@ import org.jetbrains.annotations.Nls;
 
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class WeatherData implements TableModel {
@@ -50,7 +52,7 @@ public class WeatherData implements TableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         if (columnIndex == 0) {
-            return hourly.time.get(rowIndex);
+            return hourly.time.get(rowIndex).get(Calendar.HOUR_OF_DAY) + ":" + hourly.time.get(rowIndex).get(Calendar.MINUTE);
         }
         return hourly.temperature_2m.get(rowIndex);
     }
@@ -71,7 +73,7 @@ public class WeatherData implements TableModel {
     }
 
     public class Hourly {
-        public List<String> time;
+        public List<Calendar> time;
         public List<Double> temperature_2m;
     }
 

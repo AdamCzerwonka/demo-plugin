@@ -31,6 +31,7 @@ public class WeatherContentWindowFactory implements ToolWindowFactory {
         private Location location;
 
         public WeatherContentWindow(ToolWindow toolWindow) {
+            textField.setPreferredSize(new Dimension(200, 30));
             searchButton.addActionListener(new SearchButtonListener());
             contentPanel.setLayout(new BorderLayout(0, 20));
             contentPanel.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0));
@@ -48,7 +49,12 @@ public class WeatherContentWindowFactory implements ToolWindowFactory {
             public void actionPerformed(ActionEvent e) {
                 String value = textField.getText();
                 LocationService locationService = new LocationService();
-                location = locationService.getLocation(value);
+                try {
+                    location = locationService.getLocation(value);
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(null, "Location not found", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 WeatherService weatherService = new WeatherService();
                 WeatherData data = weatherService.getWeather(location);
 

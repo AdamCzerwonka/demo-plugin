@@ -21,7 +21,7 @@ public class WeatherContainer {
         contentPanel.add(new JLabel("Wind speed: " + data.current.wind_speed_10m + "km/h"));
         JBTable table = new JBTable(data);
         JBScrollPane scrollPane = new JBScrollPane(table);
-        scrollPane.setSize(300, 600);
+        scrollPane.setPreferredSize(new Dimension(300, 510));
         contentPanel.add(scrollPane);
     }
 
